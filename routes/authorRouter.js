@@ -6,7 +6,7 @@ const authorController = require('../controllers/authorController.js');
 
 
 authorRouter.get('/', authorController.getAllAuthors);
-authorRouter.get('/:id', authorController.getAuthorsByID);
+authorRouter.get('/:authorId', authorController.getOneAuthor);
 authorRouter.post('/', authorController.addAuthor);
 
 module.exports = authorRouter;

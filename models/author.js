@@ -1,12 +1,11 @@
-module.exports = [
-    {
-        "id":"10001",
-        "first_name":"Jennifer",
-        "last_name":"Robbins",
-    },
-    {
-        "id":"10002",
-        "first_name":"Mike",
-        "last_name":"Gao",
-    }
-]
+const mongoose = require("mongoose");
+
+const authorSchema = new mongoose.Schema({
+    authorid:String,
+    first_name:String,
+    last_name:String
+})
+
+const Author = mongoose.model("Author", authorSchema)
+
+module.exports = Author

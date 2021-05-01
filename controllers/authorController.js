@@ -1,16 +1,28 @@
+const Author = require("../models/author");
 const authors = require("../models/author");
 
-const getAllAuthors  =(req, res) => {
-    res.send(authors) 
+
+const getAllAuthors = async (req,res) => {
+    try{
+        const authors = await Author.find()
+        return res.send(authors)
+    }catch(err){
+        res.status(400)
+        return res.send("Database query failed")
+    }
 }
 
-const getAuthorsByID = (req,res) => {
-    const author = authors.find(author => author.id === req.params.id)
-    if(author){
-        res.send(author)
-    }
-    else{
-        res.send('No author found')
+const getOneAuthor = async (req,res) => {
+    try{
+        const oneAuthor = await Author.findOne({"authorId": req.params.id})
+            if(oneAuthor === null){
+                res.status(404)
+                return res.send("Author not found")
+            }
+            return res.send(oneAuthor)
+    }catch(err){
+        res.status(400)
+        return res.send("Database query failed")
     }
 }
 
@@ -25,6 +37,6 @@ const addAuthor = (req, res) => {
 
 module.exports ={
     getAllAuthors,
-    getAuthorsByID,
+    getOneAuthor,
     addAuthor
 }
